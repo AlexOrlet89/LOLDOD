@@ -18,6 +18,7 @@ describe('backend-express-template routes', () => {
     const { email } = mockUser;
 
     expect(res.body).toEqual({
+      id: expect.any(String),
       email,
     });
   });
