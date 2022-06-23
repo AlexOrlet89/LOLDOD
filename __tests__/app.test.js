@@ -13,7 +13,7 @@ describe('backend-express-template routes', () => {
     return setup(pool);
   });
 
-  it('creates a new user', async () => {
+  it.skip('creates a new user', async () => {
     const res = await request(app).post('/api/v1/users').send(mockUser);
     const { email } = mockUser;
 
@@ -21,6 +21,13 @@ describe('backend-express-template routes', () => {
       id: expect.any(String),
       email,
     });
+  });
+  it('signs in an existing user', async () => {
+    await request(app).post('/api/v1/users').send(mockUser);
+    const res = await request(app)
+      .post('/api/v1/users/sessions')
+      .send({ email: 'test@dod.com', password: '12345' });
+    expect(res.status).toEqual(200);
   });
 
   afterAll(() => {
