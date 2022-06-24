@@ -31,7 +31,7 @@ describe('user testing', () => {
       .send({ email: 'test@dod.com', password: '12345' });
     expect(res.status).toEqual(200);
   });
-  it('logs out a user', async () => {
+  it.skip('logs out a user', async () => {
     await request(app).post('/api/v1/users').send(mockUser);
     const res = await request(app)
       .post('/api/v1/users/sessions')

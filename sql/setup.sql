@@ -10,6 +10,29 @@ CREATE TABLE secrets (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERt into secrets (title, description) VALUES
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted'),
+('WAR CRIMES', 'redacted');
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
