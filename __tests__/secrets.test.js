@@ -26,7 +26,7 @@ describe('user testing', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  it.skip('should return a 401 when returning state secrets', async () => {
+  it('should return a 401 when returning state secrets', async () => {
     const res = await request(app).get('/api/v1/secrets');
     expect(res.body).toEqual({
       message: 'You must be signed in to continue',

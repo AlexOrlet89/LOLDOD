@@ -14,7 +14,7 @@ describe('user testing', () => {
     return setup(pool);
   });
 
-  it.skip('creates a new user', async () => {
+  it('creates a new user', async () => {
     const res = await request(app).post('/api/v1/users').send(mockUser);
     const { email } = mockUser;
 
@@ -23,7 +23,7 @@ describe('user testing', () => {
       email,
     });
   });
-  it.skip('signs in an existing user', async () => {
+  it('signs in an existing user', async () => {
     // const { email } = mockUser;
 
     await request(app).post('/api/v1/users').send(mockUser);
@@ -32,7 +32,7 @@ describe('user testing', () => {
       .send({ email: 'test@dod.com', password: '12345' });
     expect(res.status).toEqual(200);
   });
-  it.skip('logs out a user', async () => {
+  it('logs out a user', async () => {
     await request(app).post('/api/v1/users').send(mockUser);
     const res = await request(app)
       .post('/api/v1/users/sessions')
