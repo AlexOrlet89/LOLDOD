@@ -3,10 +3,23 @@ const app = require('../lib/app');
 const request = require('supertest');
 
 const pool = require('../lib/utils/pool');
+const UserService = require('../lib/services/UserService');
 
 const mockUser = {
   email: 'test@dod.com',
   password: '12345',
+};
+
+const registerAndLogin = async (userProps = {}) => {
+  const password = userProps.password ?? mockUser.password;
+
+  const agent = request.agent(app);
+
+  const user = await UserService.create({ ...mockUser, userProps });
+
+  const { email } = user;
+  await agent.post('/api/v1/users/sessions').send({ email, password });
+  return [agent, user];
 };
 
 describe('user testing', () => {
@@ -21,12 +34,9 @@ describe('user testing', () => {
     });
   });
   it('should return a list of secrets if user is signed in', async () => {
-    await request(app).post('/api/v1/users').send(mockUser);
-    const res = await request(app)
-      .post('/api/v1/users/sessions')
-      .send({ email: 'test@dod.com', password: '12345' });
-    expect(res.status).toEqual(200);
-    const secretsRevealed = await request(app).get('/api/v1/secrets');
+    const [agent] = await registerAndLogin();
+
+    const secretsRevealed = await agent.get('/api/v1/secrets');
     expect(secretsRevealed.status).toEqual(200);
   });
   afterAll(() => {
