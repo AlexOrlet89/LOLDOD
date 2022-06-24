@@ -22,7 +22,7 @@ describe('user testing', () => {
       email,
     });
   });
-  it('signs in an existing user', async () => {
+  it.skip('signs in an existing user', async () => {
     // const { email } = mockUser;
 
     await request(app).post('/api/v1/users').send(mockUser);
@@ -30,21 +30,18 @@ describe('user testing', () => {
       .post('/api/v1/users/sessions')
       .send({ email: 'test@dod.com', password: '12345' });
     expect(res.status).toEqual(200);
-    // expect(res.body).toEqual({
-    //   id: expect.any(String),
-    //   email,
-    // });
   });
-  it.skip('logs out a user', async () => {
+  it('logs out a user', async () => {
     await request(app).post('/api/v1/users').send(mockUser);
     const res = await request(app)
       .post('/api/v1/users/sessions')
       .send({ email: 'test@dod.com', password: '12345' });
     expect(res.status).toEqual(200);
-    await request(app).delete('/api/v1/users/sessions');
+    const logout = await request(app).delete('/api/v1/users/sessions');
+    expect(logout.status).toEqual(200);
+  });
 
-    afterAll(() => {
-      pool.end();
-    });
+  afterAll(() => {
+    pool.end();
   });
 });
